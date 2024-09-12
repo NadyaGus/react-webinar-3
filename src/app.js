@@ -30,7 +30,9 @@ function App({ store }) {
                 <div className="Item-title">
                   {item.title}
                   {item.selectCount ? (
-                    <div className="Item-select-count">Выделяли {item.selectCount} раз</div>
+                    <div>
+                      {'\u00A0'}| Выделяли {item.selectCount} раз
+                    </div>
                   ) : null}
                 </div>
 
