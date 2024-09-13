@@ -4,7 +4,7 @@
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.code = initState.list.at(-1).code + 1; // Код для новой записи, беру из кода последней записи + 1
+    this.code = initState.list.at(-1).code; // Код для новой записи, беру из кода последней записи
     this.listeners = []; // Слушатели изменений состояния
   }
 
