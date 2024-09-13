@@ -1,5 +1,6 @@
 import React from 'react';
 import { createElement } from './utils.js';
+import { addDeclension } from './addDeclension.js';
 import './styles.css';
 
 /**
@@ -31,7 +32,8 @@ function App({ store }) {
                   {item.title}
                   {item.selectCount ? (
                     <div>
-                      {'\u00A0'}| Выделяли {item.selectCount} раз
+                      {'\u00A0'}| Выделяли {item.selectCount}{' '}
+                      {addDeclension('раз', 'а', item.selectCount)}
                     </div>
                   ) : null}
                 </div>
