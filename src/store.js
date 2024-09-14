@@ -4,7 +4,8 @@
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.code = initState.list.at(-1).code; // Код для новой записи, беру из кода последней записи
+    this.code =
+      initState.list.length !== 0 ? Math.max(...initState.list.map(item => item.code)) : 0; // Начальное состояние кода - максимальное значение кода в списке
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -44,6 +45,7 @@ class Store {
    */
   addItem() {
     this.code++; // Увеличиваем код в поле Store
+    console.log(this.code);
 
     this.setState({
       ...this.state,
