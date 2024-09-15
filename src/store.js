@@ -1,11 +1,12 @@
+import { getMaxCode } from './getMaxCode';
+
 /**
  * Хранилище состояния приложения
  */
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.code =
-      initState.list.length !== 0 ? Math.max(...initState.list.map(item => item.code)) : 0; // Начальное состояние кода - максимальное значение кода в списке
+    this.code = getMaxCode(initState.list); // Начальное состояние кода - максимальное значение кода в списке
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -44,8 +45,7 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
-    this.code++; // Увеличиваем код в поле Store
-    console.log(this.code);
+    this.code++; // Увеличиваем код
 
     this.setState({
       ...this.state,
