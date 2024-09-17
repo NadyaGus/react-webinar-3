@@ -6,6 +6,7 @@ import { generateCode } from './utils';
 class Store {
   constructor(initState = {}) {
     this.state = initState;
+    this.cart = [];
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -62,26 +63,13 @@ class Store {
     });
   }
 
-  /**
-   * Выделение записи по коду
-   * @param code
-   */
-  selectItem(code) {
-    this.setState({
-      ...this.state,
-      list: this.state.list.map(item => {
-        if (item.code === code) {
-          // Смена выделения и подсчёт
-          return {
-            ...item,
-            selected: !item.selected,
-            count: item.selected ? item.count : item.count + 1 || 1,
-          };
-        }
-        // Сброс выделения если выделена
-        return item.selected ? { ...item, selected: false } : item;
-      }),
-    });
+  addItemToCart(code) {
+    if (this.cart.find(item => item.code === code)) {
+      // Если в корзине уже есть такая запись
+      this.cart.find(item => item.code === code).quantity += 1;
+    } else {
+      this.cart = [...this.cart, { code, quantity: 1 }]; // Добавляем новую запись
+    }
   }
 }
 

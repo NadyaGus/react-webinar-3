@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import Item from '../item';
 import './style.css';
 
-function List({ list, onDeleteItem, onSelectItem }) {
+function List({ list, onAddItemToCart }) {
   return (
     <div className="List">
       {list.map(item => (
         <div key={item.code} className="List-item">
-          <Item item={item} onDelete={onDeleteItem} onSelect={onSelectItem} />
+          <Item item={item} onAddItemToCart={onAddItemToCart} />
         </div>
       ))}
     </div>
@@ -21,13 +21,11 @@ List.propTypes = {
       code: PropTypes.number,
     }),
   ).isRequired,
-  onDeleteItem: PropTypes.func,
-  onSelectItem: PropTypes.func,
+  onAddItemToCart: PropTypes.func,
 };
 
 List.defaultProps = {
-  onDeleteItem: () => {},
-  onSelectItem: () => {},
+  onAddItemToCart: () => {},
 };
 
 export default React.memo(List);

@@ -4,6 +4,10 @@ import { plural } from '../../utils';
 import './style.css';
 
 function Item(props) {
+  const onClick = () => {
+    props.onAddItemToCart(props.item.code);
+  };
+
   return (
     <div className={'Item'}>
       <div className="Item-code">{props.item.code}</div>
@@ -13,7 +17,7 @@ function Item(props) {
         {'\u00A0'}₽
       </div>
       <div className="Item-actions">
-        <button>Добавить</button>
+        <button onClick={onClick}>Добавить</button>
       </div>
     </div>
   );
@@ -25,11 +29,11 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
-  onDelete: PropTypes.func,
+  onAddItemToCart: PropTypes.func,
 };
 
 Item.defaultProps = {
-  onDelete: () => {},
+  onAddItemToCart: () => {},
 };
 
 export default React.memo(Item);

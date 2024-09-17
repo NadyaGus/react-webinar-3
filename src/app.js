@@ -20,27 +20,19 @@ function App({ store }) {
       [store],
     ),
 
-    onSelectItem: useCallback(
+    onAddItemToCart: useCallback(
       code => {
-        store.selectItem(code);
+        store.addItemToCart(code);
       },
       [store],
     ),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store]),
   };
 
   return (
     <PageLayout>
       <Head title="Магазин" />
       <Controls />
-      <List
-        list={list}
-        onDeleteItem={callbacks.onDeleteItem}
-        onSelectItem={callbacks.onSelectItem}
-      />
+      <List list={list} onAddItemToCart={callbacks.onAddItemToCart} />
     </PageLayout>
   );
 }
