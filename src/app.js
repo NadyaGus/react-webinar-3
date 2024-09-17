@@ -22,8 +22,8 @@ function App({ store }) {
     ),
 
     onAddItemToCart: useCallback(
-      code => {
-        store.addItemToCart(code);
+      item => {
+        store.addItemToCart(item);
       },
       [store],
     ),

@@ -62,7 +62,7 @@ class Store {
     });
   }
 
-  addItemToCart(code) {
+  addItemToCart({ code, price, title }) {
     if (this.state.cart.find(item => item.code === code)) {
       // Если в корзине уже есть такая запись
       this.setState({
@@ -73,10 +73,11 @@ class Store {
         }),
       });
     } else {
-      const price = this.state.list.find(item => item.code === code).price;
-      this.setState({ ...this.state, cart: [...this.state.cart, { code, quantity: 1, price }] }); // Добавляем новую запись
+      this.setState({
+        ...this.state,
+        cart: [...this.state.cart, { code, quantity: 1, price, title }],
+      }); // Добавляем новую запись
     }
-    console.log(this.state.cart);
   }
 
   getTotalPrice() {

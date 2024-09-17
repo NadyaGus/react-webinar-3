@@ -5,7 +5,7 @@ import './style.css';
 
 function Item(props) {
   const onClick = () => {
-    props.onAddItemToCart(props.item.code);
+    props.onAddItemToCart(props.item);
   };
 
   return (
