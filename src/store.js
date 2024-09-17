@@ -6,7 +6,6 @@ import { generateCode } from './utils';
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.cart = [];
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -64,12 +63,24 @@ class Store {
   }
 
   addItemToCart(code) {
-    if (this.cart.find(item => item.code === code)) {
+    if (this.state.cart.find(item => item.code === code)) {
       // Если в корзине уже есть такая запись
-      this.cart.find(item => item.code === code).quantity += 1;
+      this.setState({
+        ...this.state,
+        cart: this.state.cart.map(item => {
+          if (item.code === code) item.quantity += 1;
+          return item;
+        }),
+      });
     } else {
-      this.cart = [...this.cart, { code, quantity: 1 }]; // Добавляем новую запись
+      const price = this.state.list.find(item => item.code === code).price;
+      this.setState({ ...this.state, cart: [...this.state.cart, { code, quantity: 1, price }] }); // Добавляем новую запись
     }
+    console.log(this.state.cart);
+  }
+
+  getTotalPrice() {
+    return this.state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0) || 0;
   }
 }
 

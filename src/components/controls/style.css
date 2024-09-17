@@ -3,3 +3,13 @@
   justify-content: flex-end;
   padding: 20px;
 }
+
+.Controls-wrapper {
+  display: flex;
+  gap: 15px;
+  padding-right: 20px;
+}
+
+.Controls-cart {
+  font-weight: bold;
+}
