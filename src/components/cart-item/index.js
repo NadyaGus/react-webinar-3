@@ -1,0 +1,38 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import './style.css';
+
+function CartItem({ item, onDeleteItemFromCart = () => {} }) {
+  return (
+    <div className="Cart-item" key={item.code}>
+      <div className="Cart-item-title-wrapper">
+        <div className="Cart-item-code">{item.code}</div>
+        <div className="Cart-item-title">{item.title}</div>
+      </div>
+      <div className="Cart-item-price-wrapper">
+        <div className="Cart-item-price">
+          {item.price}
+          {'\u00A0'}₽
+        </div>
+        <div className="Cart-item-quantity">
+          {item.quantity ?? 1}
+          {'\u00A0'}шт
+        </div>
+        <div className="Cart-item-actions">
+          <button onClick={() => onDeleteItemFromCart(item.code)}>Удалить</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+CartItem.propTypes = {
+  item: PropTypes.shape({
+    code: PropTypes.number,
+    title: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
+  onDeleteItemFromCart: PropTypes.func,
+};
+
+export default React.memo(CartItem);

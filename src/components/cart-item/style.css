@@ -1,0 +1,34 @@
+.Cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  font-size: 18px;
+  border-top: 1px dashed #cccccc;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:last-child {
+    border-bottom: 1px dashed #cccccc;
+  }
+}
+
+.Cart-item-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 16px;
+}
+
+.Cart-item-price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.Cart-item-quantity {
+  width: 70px;
+  text-align: end;
+}
