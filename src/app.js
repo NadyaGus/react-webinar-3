@@ -3,6 +3,7 @@ import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
+import Cart from './components/cart';
 
 /**
  * Приложение
@@ -13,10 +14,12 @@ function App({ store }) {
   const list = store.getState().list;
   const cart = store.getState().cart;
 
+  const [isOpen, setIsOpen] = React.useState(false);
+
   const callbacks = {
-    onDeleteItem: useCallback(
+    onDeleteItemFromCart: useCallback(
       code => {
-        store.deleteItem(code);
+        store.deleteItemFromCart(code);
       },
       [store],
     ),
@@ -27,13 +30,21 @@ function App({ store }) {
       },
       [store],
     ),
+
+    toggleModal: useCallback(() => setIsOpen(!isOpen), [isOpen]),
   };
 
   return (
     <PageLayout>
       <Head title="Магазин" />
-      <Controls cart={cart} onDeleteItem={callbacks.onDeleteItem} />
+      <Controls cart={cart} toggleModal={callbacks.toggleModal} />
       <List list={list} onAddItemToCart={callbacks.onAddItemToCart} />
+      <Cart
+        cart={cart}
+        onDeleteItemFromCart={callbacks.onDeleteItemFromCart}
+        isOpen={isOpen}
+        toggleModal={callbacks.toggleModal}
+      />
     </PageLayout>
   );
 }

@@ -80,6 +80,13 @@ class Store {
     }
   }
 
+  deleteItemFromCart(code) {
+    this.setState({
+      ...this.state,
+      cart: this.state.cart.filter(item => item.code !== code),
+    });
+  }
+
   getTotalPrice() {
     return this.state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0) || 0;
   }
