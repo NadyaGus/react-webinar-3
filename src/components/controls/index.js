@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { plural } from '../../utils';
 import './style.css';
 
-function Controls({ cart, toggleModal }) {
+function Controls({ cart = [], toggleModal = () => {} }) {
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
@@ -25,11 +25,6 @@ function Controls({ cart, toggleModal }) {
 Controls.propTypes = {
   cart: PropTypes.array,
   toggleModal: PropTypes.func,
-};
-
-Controls.defaultProps = {
-  cart: [],
-  toggleModal: () => {},
 };
 
 export default React.memo(Controls);

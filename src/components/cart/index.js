@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function Cart({ cart, onDeleteItemFromCart, isOpen, toggleModal }) {
+function Cart({
+  cart = [],
+  onDeleteItemFromCart = () => {},
+  isOpen = false,
+  toggleModal = () => {},
+}) {
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   if (!isOpen) {
@@ -55,11 +60,6 @@ function Cart({ cart, onDeleteItemFromCart, isOpen, toggleModal }) {
 Cart.propTypes = {
   cart: PropTypes.array,
   onDeleteItemFromCart: PropTypes.func,
-};
-
-Cart.defaultProps = {
-  cart: [],
-  onDeleteItemFromCart: () => {},
 };
 
 export default React.memo(Cart);

@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { plural } from '../../utils';
 import './style.css';
 
-function Item(props) {
+function Item({ item, onAddItemToCart = () => {} }) {
   const onClick = () => {
-    props.onAddItemToCart(props.item);
+    onAddItemToCart(item);
   };
 
   return (
     <div className={'Item'}>
-      <div className="Item-code">{props.item.code}</div>
-      <div className="Item-title">{props.item.title}</div>
+      <div className="Item-code">{item.code}</div>
+      <div className="Item-title">{item.title}</div>
       <div className="Item-price">
-        {props.item.price}
+        {item.price}
         {'\u00A0'}₽
       </div>
       <div className="Item-actions">
@@ -30,10 +30,6 @@ Item.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   onAddItemToCart: PropTypes.func,
-};
-
-Item.defaultProps = {
-  onAddItemToCart: () => {},
 };
 
 export default React.memo(Item);
