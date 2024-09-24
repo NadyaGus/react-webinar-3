@@ -39,7 +39,7 @@ function App({ store }) {
     <PageLayout>
       <Head title="Магазин" />
       <Controls cart={cart} toggleModal={callbacks.toggleModal} />
-      <List list={list} onAddItemToCart={callbacks.onAddItemToCart} />
+      <List list={list} itemFunction={callbacks.onAddItemToCart} />
 
       <ModalLayout isOpen={isOpenModal}>
         <Cart

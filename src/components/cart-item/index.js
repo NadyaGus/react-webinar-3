@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function CartItem({ item, onDeleteItemFromCart = () => {} }) {
+function CartItem({ item, itemFunction = () => {} }) {
+  const onClick = () => {
+    itemFunction(item);
+  };
+
   return (
     <div className="Cart-item" key={item.code}>
       <div className="Cart-item-title-wrapper">
@@ -19,7 +23,7 @@ function CartItem({ item, onDeleteItemFromCart = () => {} }) {
           {'\u00A0'}шт
         </div>
         <div className="Cart-item-actions">
-          <button onClick={() => onDeleteItemFromCart(item.code)}>Удалить</button>
+          <button onClick={onClick}>Удалить</button>
         </div>
       </div>
     </div>
@@ -32,7 +36,7 @@ CartItem.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
-  onDeleteItemFromCart: PropTypes.func,
+  itemFunction: PropTypes.func,
 };
 
 export default React.memo(CartItem);

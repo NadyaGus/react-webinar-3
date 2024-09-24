@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { plural } from '../../utils';
 import './style.css';
 
-function Item({ item, onAddItemToCart = () => {} }) {
+function Item({ item, itemFunction = () => {} }) {
   const onClick = () => {
-    onAddItemToCart(item);
+    itemFunction(item);
   };
 
   return (
@@ -29,7 +28,7 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
-  onAddItemToCart: PropTypes.func,
+  itemFunction: PropTypes.func,
 };
 
 export default React.memo(Item);

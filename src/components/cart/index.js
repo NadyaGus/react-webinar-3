@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CartItem from '../cart-item';
 import './style.css';
+import List from '../list';
 
 function Cart({ cart = [], onDeleteItemFromCart = () => {}, toggleModal = () => {} }) {
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -14,9 +15,7 @@ function Cart({ cart = [], onDeleteItemFromCart = () => {}, toggleModal = () => 
       </div>
       <div className="Cart-body">
         {cart.length > 0 ? (
-          cart.map(item => (
-            <CartItem key={item.code} item={item} onDeleteItemFromCart={onDeleteItemFromCart} />
-          ))
+          <List list={cart} itemFunction={onDeleteItemFromCart} ItemComponent={CartItem} />
         ) : (
           <div className="Cart-empty">Корзина пуста</div>
         )}
