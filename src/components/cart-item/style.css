@@ -4,15 +4,6 @@
   align-items: center;
   padding: 20px;
   font-size: 18px;
-  border-top: 1px dashed #cccccc;
-
-  &:first-child {
-    border-top: none;
-  }
-
-  &:last-child {
-    border-bottom: 1px dashed #cccccc;
-  }
 }
 
 .Cart-item-title-wrapper {
