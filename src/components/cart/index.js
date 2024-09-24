@@ -4,9 +4,12 @@ import CartItem from '../cart-item';
 import './style.css';
 import List from '../list';
 
-function Cart({ cart = [], onDeleteItemFromCart = () => {}, toggleModal = () => {} }) {
-  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-
+function Cart({
+  cart = [],
+  onDeleteItemFromCart = () => {},
+  toggleModal = () => {},
+  totalPrice = '',
+}) {
   return (
     <>
       <div className="Cart-header">
@@ -22,7 +25,7 @@ function Cart({ cart = [], onDeleteItemFromCart = () => {}, toggleModal = () => 
       </div>
       <div className="Cart-footer">
         Итого{'\u00A0'}
-        <div className="Cart-total">{totalPrice} ₽</div>
+        <div className="Cart-total">{totalPrice}</div>
       </div>
     </>
   );
@@ -31,6 +34,8 @@ function Cart({ cart = [], onDeleteItemFromCart = () => {}, toggleModal = () => 
 Cart.propTypes = {
   cart: PropTypes.array,
   onDeleteItemFromCart: PropTypes.func,
+  toggleModal: PropTypes.func,
+  totalPrice: PropTypes.string,
 };
 
 export default React.memo(Cart);

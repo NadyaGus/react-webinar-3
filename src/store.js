@@ -1,4 +1,5 @@
 import { generateCode } from './utils';
+import { toLocalePrice } from './utils';
 
 /**
  * Хранилище состояния приложения
@@ -88,7 +89,16 @@ class Store {
   }
 
   getTotalPrice() {
-    return this.state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0) || 0;
+    const totalPrice = this.state.totalPrice || 0;
+
+    return toLocalePrice(totalPrice);
+  }
+
+  setTotalPrice() {
+    this.setState({
+      ...this.state,
+      totalPrice: this.state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    });
   }
 }
 

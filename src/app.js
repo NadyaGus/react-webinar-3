@@ -14,6 +14,7 @@ import ModalLayout from './components/modal-layout';
 function App({ store }) {
   const list = store.getState().list;
   const cart = store.getState().cart;
+  const totalPrice = store.getTotalPrice();
 
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
@@ -21,6 +22,7 @@ function App({ store }) {
     onDeleteItemFromCart: useCallback(
       code => {
         store.deleteItemFromCart(code);
+        store.setTotalPrice();
       },
       [store],
     ),
@@ -28,6 +30,7 @@ function App({ store }) {
     onAddItemToCart: useCallback(
       item => {
         store.addItemToCart(item);
+        store.setTotalPrice();
       },
       [store],
     ),
@@ -38,7 +41,7 @@ function App({ store }) {
   return (
     <PageLayout>
       <Head title="Магазин" />
-      <Controls cart={cart} toggleModal={callbacks.toggleModal} />
+      <Controls cart={cart} toggleModal={callbacks.toggleModal} totalPrice={totalPrice} />
       <List list={list} itemFunction={callbacks.onAddItemToCart} />
 
       <ModalLayout isOpen={isOpenModal}>
@@ -46,6 +49,7 @@ function App({ store }) {
           cart={cart}
           onDeleteItemFromCart={callbacks.onDeleteItemFromCart}
           toggleModal={callbacks.toggleModal}
+          totalPrice={totalPrice}
         />
       </ModalLayout>
     </PageLayout>

@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { plural } from '../../utils';
 import './style.css';
 
-function Controls({ cart = [], toggleModal = () => {} }) {
-  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-
+function Controls({ cart = [], toggleModal = () => {}, totalPrice = '' }) {
   return (
     <div className="Controls">
       <div className="Controls-wrapper">
@@ -13,7 +11,7 @@ function Controls({ cart = [], toggleModal = () => {} }) {
         <div className="Controls-cart">
           {cart.length > 0
             ? `${cart.length}
-          ${plural(cart.length, { one: 'товар', few: 'товара', many: 'товаров' })} / ${totalPrice} ₽`
+          ${plural(cart.length, { one: 'товар', few: 'товара', many: 'товаров' })} / ${totalPrice}`
             : 'пусто'}
         </div>
       </div>
@@ -25,6 +23,7 @@ function Controls({ cart = [], toggleModal = () => {} }) {
 Controls.propTypes = {
   cart: PropTypes.array,
   toggleModal: PropTypes.func,
+  totalPrice: PropTypes.string,
 };
 
 export default React.memo(Controls);

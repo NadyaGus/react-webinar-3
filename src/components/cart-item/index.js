@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
+import { toLocalePrice } from '../../utils';
 
 function CartItem({ item, itemFunction = () => {} }) {
   const onClick = () => {
@@ -14,10 +15,7 @@ function CartItem({ item, itemFunction = () => {} }) {
         <div className="Cart-item-title">{item.title}</div>
       </div>
       <div className="Cart-item-price-wrapper">
-        <div className="Cart-item-price">
-          {item.price}
-          {'\u00A0'}₽
-        </div>
+        <div className="Cart-item-price">{toLocalePrice(item.price)}</div>
         <div className="Cart-item-quantity">
           {item.quantity ?? 1}
           {'\u00A0'}шт

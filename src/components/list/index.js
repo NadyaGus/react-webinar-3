@@ -4,7 +4,6 @@ import Item from '../item';
 import './style.css';
 
 function List({ list, itemFunction = () => {}, ItemComponent = Item }) {
-  console.log(itemFunction);
   return (
     <div className="List">
       {list.map(item => (
