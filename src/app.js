@@ -3,8 +3,9 @@ import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
-import Cart from './components/cart';
+import CartItem from './components/cart-item';
 import ModalLayout from './components/modal-layout';
+import Total from './components/total';
 
 /**
  * Приложение
@@ -44,13 +45,18 @@ function App({ store }) {
       <Controls cart={cart} toggleModal={callbacks.toggleModal} totalPrice={totalPrice} />
       <List list={list} itemFunction={callbacks.onAddItemToCart} />
 
-      <ModalLayout isOpen={isOpenModal}>
-        <Cart
-          cart={cart}
-          onDeleteItemFromCart={callbacks.onDeleteItemFromCart}
-          toggleModal={callbacks.toggleModal}
-          totalPrice={totalPrice}
-        />
+      <ModalLayout isOpen={isOpenModal} title="Корзина" toggleModal={callbacks.toggleModal}>
+        {cart.length > 0 ? (
+          <List
+            list={cart}
+            itemFunction={callbacks.onDeleteItemFromCart}
+            ItemComponent={CartItem}
+          />
+        ) : (
+          <div className="Cart-empty">Корзина пуста</div>
+        )}
+
+        <Total totalPrice={totalPrice} />
       </ModalLayout>
     </PageLayout>
   );
