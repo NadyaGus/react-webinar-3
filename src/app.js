@@ -4,6 +4,7 @@ import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
 import Cart from './components/cart';
+import ModalLayout from './components/modal-layout';
 
 /**
  * Приложение
@@ -14,7 +15,7 @@ function App({ store }) {
   const list = store.getState().list;
   const cart = store.getState().cart;
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const callbacks = {
     onDeleteItemFromCart: useCallback(
@@ -31,7 +32,7 @@ function App({ store }) {
       [store],
     ),
 
-    toggleModal: useCallback(() => setIsOpen(!isOpen), [isOpen]),
+    toggleModal: useCallback(() => setIsOpenModal(!isOpenModal), [isOpenModal]),
   };
 
   return (
@@ -39,12 +40,14 @@ function App({ store }) {
       <Head title="Магазин" />
       <Controls cart={cart} toggleModal={callbacks.toggleModal} />
       <List list={list} onAddItemToCart={callbacks.onAddItemToCart} />
-      <Cart
-        cart={cart}
-        onDeleteItemFromCart={callbacks.onDeleteItemFromCart}
-        isOpen={isOpen}
-        toggleModal={callbacks.toggleModal}
-      />
+
+      <ModalLayout isOpen={isOpenModal}>
+        <Cart
+          cart={cart}
+          onDeleteItemFromCart={callbacks.onDeleteItemFromCart}
+          toggleModal={callbacks.toggleModal}
+        />
+      </ModalLayout>
     </PageLayout>
   );
 }
