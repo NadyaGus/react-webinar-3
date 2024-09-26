@@ -16,9 +16,6 @@ function Product() {
   const params = useParams();
   const id = params.id;
 
-  // TODO remove console.log
-  console.log('product', product);
-
   const select = useSelector(state => ({
     list: state.catalog.list,
     amount: state.basket.amount,
