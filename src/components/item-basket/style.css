@@ -28,3 +28,16 @@
   font-size: 18px;
   white-space: nowrap;
 }
+
+.ItemBasket-link {
+  color: #000;
+  text-decoration: none;
+
+  &:visited {
+    color: #000;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
