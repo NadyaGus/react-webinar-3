@@ -6,6 +6,8 @@ import useSelector from '../../store/use-selector';
 import useStore from '../../store/use-store';
 import { useLoaderData, useParams } from 'react-router-dom';
 import Basket from '../basket';
+import { numberFormat } from '../../utils';
+import './style.css';
 
 function Product() {
   const store = useStore();
@@ -28,6 +30,8 @@ function Product() {
   }, [id]);
 
   const callbacks = {
+    // Добавление в корзину
+    addToBasket: useCallback(() => store.actions.basket.addToBasket(id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     // Закрытие модалки корзины
@@ -39,8 +43,20 @@ function Product() {
       <PageLayout>
         <Head title={product.title} />
         <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
-        <p>{product.description}</p>
-        <p>Цена: {product.price}</p>
+        <div className="Product">
+          <p>{product.description}</p>
+          <p>
+            Страна производителя: <span className="bold">{product.madeIn._type}</span>
+          </p>
+          <p>
+            Категория: <span className="bold">{product.category._type}</span>
+          </p>
+          <p>
+            Год выпуска: <span className="bold">{product.edition}</span>
+          </p>
+          <p className="Product-price">Цена: {numberFormat(product.price)} ₽</p>
+          <button onClick={callbacks.addToBasket}>Добавить</button>
+        </div>
       </PageLayout>
 
       {activeModal === 'basket' && <Basket />}

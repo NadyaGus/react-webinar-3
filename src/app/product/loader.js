@@ -12,4 +12,4 @@ async function getProduct({ id }) {
   return json.result;
 }
 
-export { pageLoader };
+export { pageLoader, getProduct };
