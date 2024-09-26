@@ -1,0 +1,36 @@
+.Pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+  margin-right: 20px;
+  color: #ccc;
+}
+
+.Pagination-skipper {
+  display: flex;
+  justify-content: center;
+  width: 20px;
+  color: #ccc
+}
+
+.Pagination-item {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 12px;
+  height: 20px;
+  padding: 0 4px;
+  text-decoration: none;
+  color: #000;
+}
+
+.Pagination-item:hover {
+  color: #000;
+  background-color: #E1E1E1;
+}
+
+.active {
+  color: #fff !important;
+  background-color: #0087E9 !important;
+}

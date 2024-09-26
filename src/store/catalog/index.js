@@ -1,6 +1,8 @@
 import { codeGenerator } from '../../utils';
 import StoreModule from '../module';
 
+const ITEMS_PER_PAGE = 10;
+
 class Catalog extends StoreModule {
   constructor(store, name) {
     super(store, name);
@@ -13,8 +15,9 @@ class Catalog extends StoreModule {
     };
   }
 
-  async load() {
-    const response = await fetch('/api/v1/articles');
+  async load({ page = 1 } = {}) {
+    const skip = (page - 1) * ITEMS_PER_PAGE;
+    const response = await fetch(`/api/v1/articles/?limit=10&skip=${skip}`);
     const json = await response.json();
     this.setState(
       {
@@ -23,6 +26,20 @@ class Catalog extends StoreModule {
       },
       'Загружены товары из АПИ',
     );
+  }
+
+  async loadTotal() {
+    const response = await fetch('/api/v1/articles/?limit=*');
+    const json = await response.json();
+    this.setState(
+      {
+        ...this.getState(),
+        total: json.result.items.length,
+      },
+      'Загружено всего товаров из АПИ',
+    );
+
+    return json.result.items.length;
   }
 }
 
