@@ -8,7 +8,7 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import Basket from '../basket';
 import { Pagination } from '../../components/pagination';
-import { useSearchParams } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -21,14 +21,12 @@ function Main() {
   const [totalPages, setTotalPages] = useState(1);
   const [searchParams] = useSearchParams();
 
-  useEffect(async () => {
-    const total = await store.actions.catalog.loadTotal();
-    setTotalPages(Math.ceil(total / ITEMS_PER_PAGE));
-  }, []);
+  const data = useLoaderData();
 
   useEffect(() => {
     const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
     setPage(page);
+    setTotalPages(Math.ceil(data / ITEMS_PER_PAGE));
   }, []);
 
   useEffect(() => {

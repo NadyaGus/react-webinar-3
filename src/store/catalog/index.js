@@ -27,20 +27,6 @@ class Catalog extends StoreModule {
       'Загружены товары из АПИ',
     );
   }
-
-  async loadTotal() {
-    const response = await fetch('/api/v1/articles/?limit=*');
-    const json = await response.json();
-    this.setState(
-      {
-        ...this.getState(),
-        total: json.result.items.length,
-      },
-      'Загружено всего товаров из АПИ',
-    );
-
-    return json.result.items.length;
-  }
 }
 
 export default Catalog;
